@@ -109,6 +109,8 @@ class Yadoo
       else
         print_notes model, tag
       end
+    else
+      @lang['parserror']
     end
   end
 end
