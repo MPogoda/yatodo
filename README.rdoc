@@ -1,0 +1,38 @@
+== About
+
+This is simple jabber bot, which uses
+{Rumpy}[http://github.com/Ximik/Rumpy].
+
+This bot stores TODO, sorted by tags.
+
+Pass `help` to bot for more details.
+
+
+== Usage
+
+Just modify files located in subdirectory 'config' and run yadoo.rb
+
+== Examples
+
+    <MPogoda> films + Mulholland Drive
+    <Yadoo>   TODO added.
+    <MPogoda> films + Ameli
+    <Yadoo>   TODO added.
+    <MPogoda> anime + Hell girl
+    <Yadoo>   TODO added.
+    <MPogoda> :
+    <Yadoo>   1. films  ::  Mulholland Drive
+              2. films  ::  Ameli
+              3. anime  ::  Hell girl
+    <MPogoda> films - Ameli
+    <Yadoo>   TODO removed.
+    <MPogoda> films :
+    <Yadoo>   1. films  ::  Mulholland Drive
+    <MPogoda> films - #1
+    <Yadoo>   TODO removed
+    <MPogoda> :
+    <Yadoo>   1. anime   ::  Hell girl
+
+== License
+
+Yadoo is released under the MIT license
