@@ -89,16 +89,18 @@ class Yadoo
         elsif pars[:wut][0] == ?# then
           remove_note_by_number model, tag, pars[:wut].gsub(/^#/, '').to_i
         else
-          remove_note_by_name tag, model.notes.find_by_name(pars[:wut])
+          if (notes = model.notes.where('name LIKE ?', pars[:wut] + "%")).size > 1 then
+            @lang['multiple']
+          else
+            remove_note_by_name tag, notes[0]
+          end
         end
       end
     when :add
       if pars[:tag] == '_' or pars[:wut].empty? or pars[:wut][0] == ?# then
         @lang['parserror']
       else
-        if (tag = Tag.find_by_name pars[:tag]).nil? then
-          tag = Tag.create :name => pars[:tag]
-        end
+        tag = Tag.find_or_create_by_name pars[:tag]
 
         add_note model, tag, pars[:wut]
       end

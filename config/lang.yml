@@ -2,7 +2,7 @@ hello:        Hello. Please authorize me to start working.
 authorized:   Now I'll remember you. Say `help` to find out more about me.
 stranger:     Sorry, but I don't know you. Try to add me into your roster.
 help: |
-  This is Yadoo (Yet Another TODOs organizer).
+  This is yatodo (Yet Another TODOs organizer).
   All TODOs have tags. Tags created automatically, when you add TODO to tag, like so:
     tag + todo
   Of course you can print your TODOs.
@@ -20,3 +20,4 @@ noteexists:     TODO with this text already exists.
 removednote:    TODO removed.
 parserror:      You are doing it wrong.
 nothing:        Nothing to display
+multiple:       There is multiple TODOs to delete.
