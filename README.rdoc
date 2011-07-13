@@ -10,29 +10,29 @@ Pass `help` to bot for more details.
 
 == Usage
 
-Just modify files located in subdirectory 'config' and run yadoo.rb
+Just modify files located in subdirectory 'config' and run yatodo.rb
 
 == Examples
 
     <MPogoda> films + Mulholland Drive
-    <Yadoo>   TODO added.
+    <Yatodo>   TODO added.
     <MPogoda> films + Ameli
-    <Yadoo>   TODO added.
+    <Yatodo>   TODO added.
     <MPogoda> anime + Hell girl
-    <Yadoo>   TODO added.
+    <Yatodo>   TODO added.
     <MPogoda> :
-    <Yadoo>   1. films  ::  Mulholland Drive
+    <Yatodo>   1. films  ::  Mulholland Drive
               2. films  ::  Ameli
               3. anime  ::  Hell girl
     <MPogoda> films - Ameli
-    <Yadoo>   TODO removed.
+    <Yatodo>   TODO removed.
     <MPogoda> films :
-    <Yadoo>   1. films  ::  Mulholland Drive
+    <Yatodo>   1. films  ::  Mulholland Drive
     <MPogoda> films - #1
-    <Yadoo>   TODO removed
+    <Yatodo>   TODO removed
     <MPogoda> :
-    <Yadoo>   1. anime   ::  Hell girl
+    <Yatodo>   1. anime   ::  Hell girl
 
 == License
 
-Yadoo is released under the MIT license
+Yatodo is released under the MIT license
