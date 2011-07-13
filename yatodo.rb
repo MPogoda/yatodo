@@ -9,9 +9,7 @@ class Yadoo
     @models_path = '/models/*.rb'
     @config_path = 'config'
     @main_model  = :user
-    @mutexes     = Hash.new do |h, k|
-                              h[k] = Mutex.new
-                            end
+    super
   end
 
   def parser_func(m)
