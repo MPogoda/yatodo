@@ -6,7 +6,7 @@ class Yadoo
   include Rumpy
 
   def initialize
-    @models_path = '/models/*.rb'
+    @models_path = File.dirname('__FILE__') + '/models/*.rb'
     @config_path = 'config'
     @main_model  = :user
     super
