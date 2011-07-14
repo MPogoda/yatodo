@@ -15,31 +15,37 @@ class Yadoo
 
   def parser_func(m)
     m.strip!
-    result = {}
-    if m.downcase == "help" or m.downcase == "usage" then
+    result = Hash.new
+    if m.downcase == 'help' or m.downcase == 'usage' then
       result[:action] = :help
+    elsif m == '::::times::::'
+      result[:action] = :times
+    elsif m == '::::stat::::'
+      result[:action] = :stat
     else
-      mh = /([\w\s]*)([+:-]?)(.*)/.match m
-      result[:tag] = mh[1].strip.gsub /\s+/, '_'
-      result[:tag] = "_" if result[:tag] == ""
-      result[:action] = case mh[2]
-                        when '+'
-                          :add
-                        when '-'
-                          :remove
-                        when ':'
-                          :print
-                        end
-      result[:wut] = mh[3].strip.gsub(/\s+/, ' ')
+      mh = /([\w\s]*)([+-]?)(.*)/.match m
+        result[:tag] = mh[1].strip.squeeze(' ').tr ' ', '_'
+
+        result[:tag] = '_' if result[:tag].empty?
+
+        result[:action] = case mh[2]
+                          when '+'
+                            :add
+                          when '-'
+                            :remove
+                          when ''
+                            :print
+                          end
+
+        result[:wut] = mh[3].strip.squeeze ' '
     end
     result
   end
 
   def print_notes(model, tag)
     result, k = "", 0
-    for note in model.notes do
-      result << "#{k+=1}. #{note.tag.name}\t::\t#{note.name}\n" if (tag.nil? or note.tag == tag) and
-                                                                    not note.name.empty?
+    model.notes.find_each do |note|
+      result << "#{k+=1}. #{note.tag.name}\t::\t#{note.name}\n" if tag.nil? or note.tag == tag
     end
     result = @lang[:nothing] if result.empty?
     result
@@ -56,8 +62,8 @@ class Yadoo
 
   def remove_note_by_number(model, tag, number)
     k = 0
-    for note in model.notes do
-      k += 1 if (tag.nil? or (note.tag == tag)) and not note.name.empty?
+    model.notes.find_each do |note|
+      k += 1 if (tag.nil? or (note.tag == tag))
       if number == k then
         note.destroy
         return @lang['removednote']
@@ -77,17 +83,22 @@ class Yadoo
 
   def do_func(model, pars)
     case pars[:action]
+    when :stat
+      "#{User.count} users.\t\t#{Tag.count} tags.\t\t#{Note.count} notes."
+    when :times
+      p = Process.times
+      "User: #{p.utime}.\t\tSystem: #{p.stime}"
     when :help
       @lang['help']
     when :remove
-      if pars[:wut].empty? or (pars[:wut][0] == ?# and (pars[:wut].gsub(/^#/, '').to_i) == 0) then
+      if pars[:wut].empty? or (pars[:wut][0] == ?# and (pars[:wut][1..-1].to_i) == 0) then
         @lang['parserror']
       else
         tag = model.tags.find_by_name pars[:tag]
         if pars[:tag] != '_' and tag.nil? then
           @lang['nosuchtag']
         elsif pars[:wut][0] == ?# then
-          remove_note_by_number model, tag, pars[:wut].gsub(/^#/, '').to_i
+          remove_note_by_number model, tag, pars[:wut][1..-1].to_i
         else
           if (notes = model.notes.where('name LIKE ?', pars[:wut] + "%")).size > 1 then
             @lang['multiple']
