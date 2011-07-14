@@ -24,7 +24,7 @@ class Yadoo
       result[:action] = :stat
     else
       mh = /([\w\s]*)([+-]?)(.*)/.match m
-        result[:tag] = mh[1].strip.squeeze(' ').tr ' ', '_'
+        result[:tag] = mh[1].strip.tr_s ' ', '_'
 
         result[:tag] = '_' if result[:tag].empty?
 
