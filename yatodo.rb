@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'rumpy'
 
-class Yadoo
+class Yatodo
   include Rumpy
 
   def initialize
@@ -128,4 +128,17 @@ class Yadoo
   end
 end
 
-Yadoo.new.start
+case ARGV[0]
+when '--start'
+  pid = fork do
+    Yatodo.new.start
+  end
+  File.open('yatodo.pid', 'w') do |file|
+    file.puts pid
+  end
+  Process.detach pid
+when '--stop'
+  File.open('yatodo.pid') do |file|
+    Process.kill :TERM, file.gets.strip.to_i
+  end
+end

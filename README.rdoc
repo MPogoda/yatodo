@@ -10,7 +10,10 @@ Pass `help` to bot for more details.
 
 == Usage
 
-Just modify files located in subdirectory 'config' and run yatodo.rb
+Just modify files located in subdirectory 'config' and run
+  yatodo.rb --start.
+To stop bot, run
+  yatodo.rb --stop
 
 == Examples
 
