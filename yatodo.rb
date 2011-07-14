@@ -4,13 +4,12 @@ require 'rubygems'
 require 'rumpy'
 
 class Yatodo
-  include Rumpy
+  include Rumpy::Bot
 
   def initialize
     @models_path = File.dirname('__FILE__') + '/models/*.rb'
     @config_path = 'config'
     @main_model  = :user
-    super
   end
 
   def parser_func(m)
@@ -130,15 +129,7 @@ end
 
 case ARGV[0]
 when '--start'
-  pid = fork do
-    Yatodo.new.start
-  end
-  File.open('yatodo.pid', 'w') do |file|
-    file.puts pid
-  end
-  Process.detach pid
+  Rumpy.start Yatodo
 when '--stop'
-  File.open('yatodo.pid') do |file|
-    Process.kill :TERM, file.gets.strip.to_i
-  end
+  Rumpy.stop Yatodo
 end
