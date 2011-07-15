@@ -23,7 +23,7 @@ class Yatodo
     elsif m == '::::stat::::'
       result[:action] = :stat
     else
-      mh = /([\w\s]*)([+-@]?)(.*)/.match m
+      mh = /([^[:punct:]]*|_)([+-@]?)(.*)/.match m
         result[:tag] = mh[1].strip.tr_s ' ', '_'
 
         result[:tag] = '_' if result[:tag].empty?
@@ -53,8 +53,8 @@ class Yatodo
     result
   end
 
-  def remove_note_by_name(tag, note)
-    if note.nil? or note.tag != tag then
+  def remove_note_by_name(note)
+    if note.nil? then
       @lang['nosuchitem']
     else
       note.destroy
@@ -75,7 +75,7 @@ class Yatodo
   end
 
   def add_note(model, tag, text)
-    if model.notes.find_by_name text then
+    if (note = model.notes.find_by_name text) and note.tag == tag then
       @lang['noteexists']
     else
       model.notes.create :name => text, :tag => tag
@@ -102,10 +102,13 @@ class Yatodo
         elsif pars[:wut][0] == ?# then
           remove_note_by_number model, tag, pars[:wut][1..-1].to_i
         else
-          if (notes = model.notes.where('name LIKE ?', pars[:wut] + "%")).size > 1 then
+          if (notes = model.notes.where('tag_id = ? AND name LIKE ?', tag.id, pars[:wut] + "%")).size > 1 then
+            notes.each do |note|
+              return remove_note_by_name note if note.name == pars[:wut]
+            end
             @lang['multiple']
           else
-            remove_note_by_name tag, notes[0]
+            remove_note_by_name notes[0]
           end
         end
       end
