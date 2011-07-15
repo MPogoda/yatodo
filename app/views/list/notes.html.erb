@@ -1,0 +1,6 @@
+<h1><%= link_to @user.jid, :action => 'tags', :jid => @user.jid %>  #<%= @tag.name %></h1>
+<% @user.notes.find_each do |note| %>
+  <% if note.tag == @tag then %>
+    <p><%= note.name %> </p>
+  <% end %>
+<% end %>

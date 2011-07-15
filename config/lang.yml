@@ -6,10 +6,8 @@ help: |
   All TODOs have tags. Tags created automatically, when you add TODO to tag, like so:
     tag + todo
   Of course you can print your TODOs.
-    tag
+    tag :
   If tag is empty or equals '_', then all your TODOs are printed.
-  If you want to see your TODOs at http://yatodo.net do something like that
-    tag@
   Of course you can remove todo by its text
     tag - todo
   Did you notice numbers, when you printed TODOs? You can also delete TODOs by its number:

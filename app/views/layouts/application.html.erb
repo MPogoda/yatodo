@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yatodo</title>
+  <%= stylesheet_link_tag :all %>
+</head>
+<body>
+<div id="head">
+<h1><%= link_to 'Yatodo', :root %></h1>
+<h2>Yet Another TODO</h2>
+</div>
+<div id="main">
+<%= yield %>
+</div>
+<div id="footer">
+<%= link_to 'Home', :root %>
+<%= link_to 'FAQ', :faq %>
+<%= link_to 'Sources', 'http://github.com/MPogoda/Yatodo' %>
+</div>
+</body>
+</html>

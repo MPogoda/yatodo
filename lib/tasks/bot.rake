@@ -1,0 +1,18 @@
+require 'lib/bot.rb'
+
+namespace :bot do
+  desc 'Start bot in background'
+  task :start => :environment do
+    puts 'Starting the bot'
+    puts (if Rumpy.start Bot then 'Started' else 'Not started' end)
+  end
+
+  desc 'Stop bot'
+  task :stop => :environment do
+    puts 'Stopping the bot'
+    puts (if Rumpy.stop Bot then 'Stopped' else 'Not stopped' end)
+  end
+
+  desc 'Restart bot'
+  task :restart => [:stop, :start]
+end

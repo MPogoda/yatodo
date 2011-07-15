@@ -1,0 +1,6 @@
+production:
+  adapter: adapter
+  database: database
+  username: username
+  password: password
+  host: host

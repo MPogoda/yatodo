@@ -1,13 +1,8 @@
-#!/usr/bin/env ruby
-
-require 'rumpy'
-
-
-class Yatodo
+class Bot
   include Rumpy::Bot
 
   def initialize
-    @models_path = File.dirname('__FILE__') + '/models/*.rb'
+    @pid_file    = 'tmp/pids/bot.pid'
     @config_path = 'config'
     @main_model  = :user
     @website     = 'http://yatodo.net'
@@ -139,11 +134,4 @@ class Yatodo
       @lang['parserror']
     end
   end
-end
-
-case ARGV[0]
-when '--start'
-  Rumpy.start Yatodo
-when '--stop'
-  Rumpy.stop Yatodo
 end
