@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
 require 'rumpy'
+
 
 class Yatodo
   include Rumpy::Bot
@@ -10,8 +10,9 @@ class Yatodo
     @models_path = File.dirname('__FILE__') + '/models/*.rb'
     @config_path = 'config'
     @main_model  = :user
+    @website     = 'http://yatodo.net'
   end
-
+ 
   def parser_func(m)
     m.strip!
     result = Hash.new
@@ -22,7 +23,7 @@ class Yatodo
     elsif m == '::::stat::::'
       result[:action] = :stat
     else
-      mh = /([\w\s]*)([+-]?)(.*)/.match m
+      mh = /([\w\s]*)([+-@]?)(.*)/.match m
         result[:tag] = mh[1].strip.tr_s ' ', '_'
 
         result[:tag] = '_' if result[:tag].empty?
@@ -34,6 +35,8 @@ class Yatodo
                             :remove
                           when ''
                             :print
+                          when '@'
+                            :www
                           end
 
         result[:wut] = mh[3].strip.squeeze ' '
@@ -105,6 +108,14 @@ class Yatodo
             remove_note_by_name tag, notes[0]
           end
         end
+      end
+    when :www
+      if pars[:tag] == '_' then
+        "#{@website}/#{model.jid}"
+      elsif model.tags.find_by_name pars[:tag] then
+        "#{@website}/#{model.jid}/#{pars[:tag]}"
+      else
+        @lang['nosuchtag']
       end
     when :add
       if pars[:tag] == '_' or pars[:wut].empty? or pars[:wut][0] == ?# then

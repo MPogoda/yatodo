@@ -1,6 +1,5 @@
-adapter:  adapter
-database: database
-username: username
-password: password
-host:     host
-
+adapter:  mysql
+database: yatodo
+username: yatodo
+password: s7Rmc6Fez2EuusVZ
+host:     yatodo.net
