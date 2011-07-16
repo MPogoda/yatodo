@@ -121,7 +121,7 @@ class Bot
       else
         tag = Tag.find_by_name pars[:tag]
         if tag.nil? then
-          tag = Tag.create pars[:tag]
+          tag = Tag.create :name => pars[:tag]
         end
         if tag then
           add_note model, tag, pars[:wut]
