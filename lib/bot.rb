@@ -120,8 +120,11 @@ class Bot
         @lang['parserror']
       else
         tag = Tag.find_or_create_by_name pars[:tag]
-
-        add_note model, tag, pars[:wut]
+        if tag then
+          add_note model, tag, pars[:wut]
+        else
+          @lang['parserror']
+        end
       end
     when :print
       tag = model.tags.find_by_name pars[:tag]
