@@ -1,4 +1,4 @@
 class Tag < ActiveRecord::Base
-  validates_uniqueness_of :jid
+  validates_uniqueness_of :name
   has_many :notes
 end
