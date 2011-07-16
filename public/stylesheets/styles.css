@@ -52,3 +52,7 @@ body {
   color: #FFFFAA;
   margin-right: 20px;
 }
+#buttons {
+  text-align: right;
+  margin-top: -30px;
+}

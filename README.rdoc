@@ -1,40 +1,25 @@
 == About
 
-This is simple jabber bot, which uses
+This is a simple site with integrated jabber bot, which uses
 {Rumpy}[http://github.com/Ximik/Rumpy].
 
 This bot stores TODO, sorted by tags.
 
-Pass `help` to bot for more details.
-
-
 == Usage
 
-Just modify files located in subdirectory 'config' and run
-  yatodo.rb --start.
-To stop bot, run
-  yatodo.rb --stop
+Don't forget to set up yours config/database.yml and config/xmpp.yml
 
-== Examples
+To start bot
+   rake bot:start
+To stop
+   rake bot:stop
 
-    <MPogoda> films + Mulholland Drive
-    <Yatodo>   TODO added.
-    <MPogoda> films + Ameli
-    <Yatodo>   TODO added.
-    <MPogoda> anime + Hell girl
-    <Yatodo>   TODO added.
-    <MPogoda> :
-    <Yatodo>   1. films  ::  Mulholland Drive
-              2. films  ::  Ameli
-              3. anime  ::  Hell girl
-    <MPogoda> films - Ameli
-    <Yatodo>   TODO removed.
-    <MPogoda> films :
-    <Yatodo>   1. films  ::  Mulholland Drive
-    <MPogoda> films - #1
-    <Yatodo>   TODO removed
-    <MPogoda> :
-    <Yatodo>   1. anime   ::  Hell girl
+== It's all about integration
+
+(If you are looking for how to integrate Rumpy into exist Rails app.)
+
+Add `gem 'rumpy'` into your Gemfile. Make rake task for bot lib/tasks/bot.rake
+(you can simply use our). Put your bot code into lib/bot.rb. Enjoy!
 
 == License
 
