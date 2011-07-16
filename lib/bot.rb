@@ -119,7 +119,10 @@ class Bot
       if pars[:tag] == '_' or pars[:wut].empty? or pars[:wut][0] == ?# then
         @lang['parserror']
       else
-        tag = Tag.find_or_create_by_name pars[:tag]
+        tag = Tag.find_by_name pars[:tag]
+        if tag.nil? then
+          tag = Tag.create pars[:tag]
+        end
         if tag then
           add_note model, tag, pars[:wut]
         else
