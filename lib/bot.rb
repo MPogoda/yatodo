@@ -3,6 +3,7 @@ class Bot
 
   def initialize
     @pid_file    = 'tmp/pids/bot.pid'
+    @err_file    = 'log/bot'
     @config_path = 'config'
     @main_model  = :user
     @website     = 'http://yatodo.net'
