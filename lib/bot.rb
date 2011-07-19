@@ -7,8 +7,9 @@ class Bot
     @config_path = 'config'
     @main_model  = :user
     @website     = 'http://yatodo.net'
+    @bot_name    = "Yatodo"
   end
- 
+
   def parser_func(m)
     m.strip!
     result = Hash.new
