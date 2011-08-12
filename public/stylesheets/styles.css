@@ -1,6 +1,10 @@
 body {
   background-color: #340505;  
 }
+ol {
+  list-style-type:decimal-leading-zero;
+  margin-left: 0.5em;
+}
 #head {
   font-weight: bold;
   background-color: #150000;
@@ -41,6 +45,7 @@ body {
 }
 #main ol {
   padding: 5px 0px 5px 25px;
+  list-style-type: decimal;
 }
 #main a {
   color: #BB0000;
@@ -56,7 +61,4 @@ body {
   text-align: right;
   margin-top: -30px;
 }
-ol {
-  list-style-type:decimal-leading-zero;
-  margin-left: 0.5em;
-}
+
