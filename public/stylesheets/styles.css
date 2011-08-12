@@ -1,64 +1,64 @@
 body {
-  background-color: #340505;  
+  background-color: #340505;
 }
 ol {
-  list-style-type:decimal-leading-zero;
-  margin-left: 0.5em;
+  list-style-type:  decimal-leading-zero;
+  margin-left:      0.5em;
 }
 #head {
-  font-weight: bold;
+  font-weight:      bold;
   background-color: #150000;
-  padding:20px;
-  margin-bottom: 30px;
+  padding:          1em;
+  margin-bottom:    1.5em;
 }
 #head h1 a {
-  font-size: 25px;
-  color: #FFFFFF;
+  font-size:  25px;
+  color:      #ffffff;
 }
 #head h1 a:hover {
   text-decoration: none;
 }
 #head h2 {
-  font-size: 12px;
-  color: #BBAAAA;
-  padding-top: 5px;
-  padding-left: 2px;
+  font-size:    12px;
+  color:        #bbaaaa;
+  padding-top:  0.25em;
+  padding-left: 0.1em;
 }
 #main {
-  border: 5px solid #CBC2AE;
-  border-radius: 15px;
-  background-color: #EBE3D1;
-  margin: 0px 80px 0px 80px;
-  padding: 10px;
+  border:           0.25em solid #cbc2ae;
+  border-radius:    0.75em;
+  background-color: #ebe3d1;
+  margin:           0em 4em 0em 4em;
+  padding:          0.5em;
 }
 #main h1 {
-  font-weight: bold;
-  padding-bottom: 5px;
-  color: #AA0000;
-  font-size: 20px;
+  font-weight:    bold;
+  padding-bottom: 0.25em;
+  color:          #aa0000;
+  font-size:      20px;
 }
 #main h2 {
-  font-weight: bold;
-  padding: 15px 0px 5px 0px;
-  color: #550000;
-  font-size: 16px;
+  font-weight:  bold;
+  padding:      0.75em 0em 0.25em 0em;
+  color:        #550000;
+  font-size:    16px;
 }
 #main ol {
-  padding: 5px 0px 5px 25px;
-  list-style-type: decimal;
+  padding:          0.25em 0em 0.25em 1.25em;
+  list-style-type:  decimal;
 }
 #main a {
-  color: #BB0000;
+  color: #bb0000;
 }
 #footer {
-  padding: 50px 0px 0px 80px;
+  padding: 2.5em 0em 0em 4em;
 }
 #footer a {
-  color: #FFFFAA;
-  margin-right: 20px;
+  color: #ffffaa;
+  margin-right: 1em;
 }
 #buttons {
   text-align: right;
-  margin-top: -30px;
+  margin-top: -1.5em;
 }
 
