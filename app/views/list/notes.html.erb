@@ -1,8 +1,10 @@
 <h1><%= link_to @user.jid, :action => 'tags', :jid => @user.jid %>  #<%= @tag.name %></h1>
-<ol>
-  <% @user.notes.find_each do |note| %>
-    <% if note.tag == @tag then %>
-      <li><%= note.name %></li>
+<div id="list">
+  <ol>
+    <% @user.notes.find_each do |note| %>
+      <% if note.tag == @tag then %>
+        <li><%= note.name %></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ol>
+  </ol>
+</div>
