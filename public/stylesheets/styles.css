@@ -56,3 +56,4 @@ body {
   text-align: right;
   margin-top: -30px;
 }
+ul { list-style-type:decimal-leading-zero; }
