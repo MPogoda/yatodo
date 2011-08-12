@@ -58,5 +58,5 @@ body {
 }
 ol.lists {
   list-style-type:  decimal-leading-zero;
-  margin-left:      0.5em;
+  margin-left:      1em;
 }
