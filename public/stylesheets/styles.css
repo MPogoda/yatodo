@@ -58,5 +58,5 @@ body {
 }
 ol {
   list-style-type:decimal-leading-zero;
-  list-style-position:inside;
+  margin-left: 10px;
 }
