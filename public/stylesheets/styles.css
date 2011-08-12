@@ -56,7 +56,7 @@ body {
   text-align: right;
   margin-top: -1.5em;
 }
-#list ol {
+ol.lists {
   list-style-type:  decimal-leading-zero;
   margin-left:      0.5em;
 }

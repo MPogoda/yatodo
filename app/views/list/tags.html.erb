@@ -1,13 +1,11 @@
 <h1><%= link_to @user.jid, 'xmpp:' + @user.jid %></h1>
 <% @user.tags.find_each do |tag| %>
   <h2><%= link_to '#' + tag.name, :action => 'notes', :tag => tag.name, :jid => @user.jid %></h2>
-  <div id="list">
-    <ol>
+    <ol class="lists">
       <% tag.notes.find_each do |note| %>
         <% if note.user == @user then %>
           <li><%= note.name %></li>
         <% end %>
       <% end %>
     </ol>
-  </div>
 <% end %>
