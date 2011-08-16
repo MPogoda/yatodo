@@ -7,18 +7,22 @@ class Bot
     @config_path = 'config'
     @main_model  = :user
     @website     = 'http://yatodo.net'
-    @bot_name    = "Yatodo"
+    @bot_name    = 'Yatodo'
   end
 
   def parser_func(m)
     m.strip!
+    spl = m.split ' ', 2
+    spl[0].downcase!
+
     result = Hash.new
-    if m.downcase == 'help' or m.downcase == 'usage' then
+
+    case spl[0]
+    when 'help'
       result[:action] = :help
-    elsif m == '::::times::::'
-      result[:action] = :times
-    elsif m == '::::stat::::'
-      result[:action] = :stat
+    when 'debug'
+      result[:action] = :debug
+      result[:wut]    = spl[1]
     else
       mh = /([^[:punct:]]*|_)([+-@]?)(.*)/.match m
         result[:tag] = mh[1].strip.tr_s ' ', '_'
@@ -42,7 +46,7 @@ class Bot
   end
 
   def print_notes(model, tag)
-    result, k = "", 0
+    result, k = '', 0
     model.notes.find_each do |note|
       result << "#{k+=1}. #{note.tag.name}\t::\t#{note.name}\n" if tag.nil? or note.tag == tag
     end
@@ -72,7 +76,7 @@ class Bot
   end
 
   def add_note(model, tag, text)
-    if (note = model.notes.find_by_name text) and note.tag == tag then
+    if (note = model.notes.find_by_name_and_tag text, tag) then
       @lang['noteexists']
     else
       model.notes.create :name => text, :tag => tag
@@ -82,11 +86,20 @@ class Bot
 
   def do_func(model, pars)
     case pars[:action]
-    when :stat
-      "#{User.count} users.\t\t#{Tag.count} tags.\t\t#{Note.count} notes."
-    when :times
-      p = Process.times
-      "User: #{p.utime}.\t\tSystem: #{p.stime}"
+    when :debug
+      case pars[:wut]
+      when 'stat'
+        "Users::#{User.count}.\t\tTags::#{Tag.count}.\t\tNotes::#{Note.count}."
+      when 'times'
+        p = Process.times
+        "User: #{p.utime}.\t\tSystem: #{p.stime}"
+      when 'users'
+        users = Array.new
+        User.find_each do |user|
+          users << "(#{user.jid}|#{user.notes.count})"
+        end
+        users.join ', '
+      end
     when :help
       @lang['help']
     when :remove
@@ -121,10 +134,7 @@ class Bot
       if pars[:tag] == '_' or pars[:wut].empty? or pars[:wut][0] == ?# then
         @lang['parserror']
       else
-        tag = Tag.find_by_name pars[:tag]
-        if tag.nil? then
-          tag = Tag.create :name => pars[:tag]
-        end
+        tag = Tag.find_or_create_by_name :name => pars[:tag]
         if tag then
           add_note model, tag, pars[:wut]
         else
