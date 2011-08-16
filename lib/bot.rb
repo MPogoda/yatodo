@@ -76,7 +76,7 @@ class Bot
   end
 
   def add_note(model, tag, text)
-    if (note = model.notes.find_by_name_and_tag text, tag) then
+    if (note = model.notes.find_by_name text) and note.tag == tag then
       @lang['noteexists']
     else
       model.notes.create :name => text, :tag => tag
@@ -134,7 +134,7 @@ class Bot
       if pars[:tag] == '_' or pars[:wut].empty? or pars[:wut][0] == ?# then
         @lang['parserror']
       else
-        tag = Tag.find_or_create_by_name :name => pars[:tag]
+        tag = Tag.find_by_name(pars[:tag]) || Tag.create(:name => pars[:tag])
         if tag then
           add_note model, tag, pars[:wut]
         else
