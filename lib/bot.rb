@@ -118,7 +118,7 @@ class Bot
               return remove_note_by_name note if note.name == pars[:wut]
               names << note.name
             end
-            @lang['multiple'] % (names.join "\n")
+            @lang['multiple'] % names.to_s
           else
             remove_note_by_name notes[0]
           end
