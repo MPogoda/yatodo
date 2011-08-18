@@ -22,4 +22,6 @@ noteexists:     TODO with this text already exists.
 removednote:    TODO removed.
 parserror:      You are doing it wrong.
 nothing:        Nothing to display
-multiple:       There is multiple TODOs to delete.
+multiple:       |
+                There is multiple TODOs to delete:
+                %s

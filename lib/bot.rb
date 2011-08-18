@@ -113,10 +113,12 @@ class Bot
           remove_note_by_number model, tag, pars[:wut][1..-1].to_i
         else
           if (notes = model.notes.where('tag_id = ? AND name LIKE ?', tag.id, pars[:wut] + "%")).size > 1 then
+            names = []
             notes.each do |note|
               return remove_note_by_name note if note.name == pars[:wut]
+              names << note.name
             end
-            @lang['multiple']
+            @lang['multiple'] % names.join "\n"
           else
             remove_note_by_name notes[0]
           end
