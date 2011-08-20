@@ -4,8 +4,6 @@ class Bot
   def initialize
     @pid_file    = 'tmp/pids/bot.pid'
     @log_file    = 'log/bot'
-    @config_path = 'config'
-    @main_model  = :user
     @website     = 'http://yatodo.net'
     @bot_name    = 'Yatodo'
   end
@@ -93,12 +91,8 @@ class Bot
       when 'times'
         p = Process.times
         "User: #{p.utime}.\t\tSystem: #{p.stime}"
-      when 'users'
-        users = Array.new
-        User.find_each do |user|
-          users << "(#{user.jid}|#{user.notes.count})"
-        end
-        users.join ', '
+      else
+        @lang['parserror']
       end
     when :help
       @lang['help']
