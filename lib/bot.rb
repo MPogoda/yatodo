@@ -46,14 +46,14 @@ class Bot
   def print_notes(model, tag)
     result, k = '', 0
     model.notes.find_each do |note|
-      result << "#{k+=1}. #{note.tag.name}\t::\t#{note.name}\n" if tag.nil? or note.tag == tag
+      result << "#{k+=1}. #{note.tag.name}\t::\t#{note.name}\n" if tag.nil? || note.tag == tag
     end
     result = @lang[:nothing] if result.empty?
     result
   end
 
   def remove_note_by_name(note)
-    if note.nil? then
+    if note.nil?
       @lang['nosuchitem']
     else
       note.destroy
@@ -64,7 +64,7 @@ class Bot
   def remove_note_by_number(model, tag, number)
     k = 0
     model.notes.find_each do |note|
-      k += 1 if (tag.nil? or (note.tag == tag))
+      k += 1 if tag.nil? || note.tag == tag
       if number == k then
         note.destroy
         return @lang['removednote']
@@ -74,7 +74,7 @@ class Bot
   end
 
   def add_note(model, tag, text)
-    if (note = model.notes.find_by_name text) and note.tag == tag then
+    if (note = model.notes.find_by_name text) && note.tag == tag
       @lang['noteexists']
     else
       model.notes.create :name => text, :tag => tag
@@ -97,16 +97,16 @@ class Bot
     when :help
       @lang['help']
     when :remove
-      if pars[:wut].empty? or (pars[:wut][0] == ?# and (pars[:wut][1..-1].to_i) == 0) then
+      if pars[:wut].empty? || pars[:wut][0] == ?# && pars[:wut][1..-1].to_i == 0
         @lang['parserror']
       else
         tag = model.tags.find_by_name pars[:tag]
-        if pars[:tag] != '_' and tag.nil? then
+        if pars[:tag] != '_' && tag.nil?
           @lang['nosuchtag']
-        elsif pars[:wut][0] == ?# then
+        elsif pars[:wut][0] == ?#
           remove_note_by_number model, tag, pars[:wut][1..-1].to_i
         else
-          if (notes = model.notes.where('tag_id = ? AND name LIKE ?', tag.id, pars[:wut] + "%")).size > 1 then
+          if (notes = model.notes.where('tag_id = ? AND name LIKE ?', tag.id, pars[:wut] + "%")).size > 1
             names = []
             notes.each do |note|
               return remove_note_by_name note if note.name == pars[:wut]
@@ -119,19 +119,19 @@ class Bot
         end
       end
     when :www
-      if pars[:tag] == '_' then
+      if pars[:tag] == '_'
         "#{@website}/#{model.jid}"
-      elsif model.tags.find_by_name pars[:tag] then
+      elsif model.tags.find_by_name pars[:tag]
         "#{@website}/#{model.jid}/#{pars[:tag]}"
       else
         @lang['nosuchtag']
       end
     when :add
-      if pars[:tag] == '_' or pars[:wut].empty? or pars[:wut][0] == ?# then
+      if pars[:tag] == '_' || pars[:wut].empty? || pars[:wut][0] == ?#
         @lang['parserror']
       else
         tag = Tag.find_by_name(pars[:tag]) || Tag.create(:name => pars[:tag])
-        if tag then
+        if tag
           add_note model, tag, pars[:wut]
         else
           @lang['parserror']
@@ -139,7 +139,7 @@ class Bot
       end
     when :print
       tag = model.tags.find_by_name pars[:tag]
-      if pars[:tag] != '_' and tag.nil? then
+      if pars[:tag] != '_' && tag.nil?
         @lang['nosuchtag']
       else
         print_notes model, tag

@@ -1,13 +1,11 @@
 class ListController < ApplicationController
   def tags
-    jid = params[:jid]
-    @user = User.find_by_jid jid
+    @user = User.find_by_jid params[:jid]
     render_404 if @user.nil?
   end
 
   def notes
-    jid = params[:jid]
-    @user = User.find_by_jid jid
+    @user = User.find_by_jid params[:jid]
     if @user.nil?
       render_404
     else
