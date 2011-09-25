@@ -1,11 +1,11 @@
-== About
+= About
 
 This is a simple site with integrated jabber bot, which uses
 {Rumpy}[http://github.com/Ximik/Rumpy].
 
 This bot stores TODO, sorted by tags.
 
-== Usage
+= Usage
 
 Don't forget to set up yours config/database.yml and config/xmpp.yml
 
@@ -14,13 +14,13 @@ To start bot
 To stop
    rake bot:stop
 
-== It's all about integration
+= It's all about integration
 
 (If you are looking for how to integrate Rumpy into exist Rails app.)
 
 Add `gem 'rumpy'` into your Gemfile. Make rake task for bot lib/tasks/bot.rake
 (you can simply use our). Put your bot code into lib/bot.rb. Enjoy!
 
-== License
+= License
 
 Yatodo is released under the MIT license
