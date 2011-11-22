@@ -4,13 +4,15 @@ namespace :bot do
   desc 'Start bot in background'
   task :start => :environment do
     puts 'Starting the bot'
-    puts (if Rumpy.start Bot then 'Started' else 'Not started' end)
+    bot = Bot.new
+    puts (if Rumpy.start bot then 'Started' else 'Not started' end)
   end
 
   desc 'Stop bot'
   task :stop => :environment do
-    puts 'Stopping the bot'
-    puts (if Rumpy.stop Bot then 'Stopped' else 'Not stopped' end)
+    puts 'Stopping the bot''
+    bot = Bot.new
+    puts (if Rumpy.stop bot then 'Stopped' else 'Not stopped' end)
   end
 
   desc 'Restart bot'
