@@ -10,7 +10,7 @@ namespace :bot do
 
   desc 'Stop bot'
   task :stop => :environment do
-    puts 'Stopping the bot''
+    puts 'Stopping the bot'
     bot = Bot.new
     puts (if Rumpy.stop bot then 'Stopped' else 'Not stopped' end)
   end
